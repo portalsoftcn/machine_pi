@@ -17,10 +17,6 @@ class MainWindow(mainwin.MainWin):
     # 将点击按钮清空文本框的,功能写成函数
     def main_button_click(self, event):
         self.text_main.Clear()
-
-
-
-
 if __name__ == '__main__':
     app = wx.App()
     # None表示的是此窗口没有上级父窗体。如果有，就直接在父窗体代码调用的时候填入‘self’就好了。
@@ -28,8 +24,6 @@ if __name__ == '__main__':
     main_win.Show()
     app.MainLoop()
 
-
-    # import wx
     bus = smbus2.SMBus(1)
     address = 0x04
 
@@ -48,6 +42,7 @@ if __name__ == '__main__':
     lcd.message("IP:" + ip_address + "\nReady Do Command")
 
     while True:
+        print ("distance is:")
         time.sleep(0.2)
         byteList = bus.read_i2c_block_data(address, 0, 6)
         distanceStr = ""
@@ -56,13 +51,9 @@ if __name__ == '__main__':
             distance = byteList[a * 3 + 1] * 256 + byteList[a * 3 + 2]
             distanceStr += str(id) + ":" + str(distance) + " "
         print (distanceStr)
-
         ret = requests.get("http://erp.zzhcdr.com/getcmd.jsp")
         cmd = ret.text.strip()
         if cmd != '':
             lcd.clear()
             lcd.message("IP:" + ip_address + "\nDo Command:" + cmd)
             bus.write_byte(0x04, int(cmd))
-
-
-
