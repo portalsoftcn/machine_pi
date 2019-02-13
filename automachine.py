@@ -4,6 +4,7 @@ import requests
 import Adafruit_CharLCD
 import socket
 import time
+import ui.MainUI
 from PyQt5.QtWidgets import QApplication, QWidget
 
 if __name__ == '__main__':
@@ -14,7 +15,6 @@ if __name__ == '__main__':
     screenH = screenRect.height()
     w = QWidget()
     w.resize(screenW, screenH)
-    #w.move(screenH/2, 300)
     w.setWindowTitle('磨机辅助控制系统')
     w.show()
     sys.exit(app.exec_())

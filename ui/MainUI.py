@@ -30,7 +30,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Slot documentation goes here.
         """
         # TODO: not implemented yet
-        raise NotImplementedError
+        self.lblPlatform.setText('油泵停止')
     
     @pyqtSlot()
     def on_btnOilStart_clicked(self):
@@ -38,4 +38,4 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Slot documentation goes here.
         """
         # TODO: not implemented yet
-        raise NotImplementedError
+        self.lblPlatform.setText('油泵启动')
