@@ -1,4 +1,5 @@
 import sys
+import ui.MainWin
 from PyQt5.QtWidgets import QApplication, QWidget
 
 if __name__ == '__main__':
