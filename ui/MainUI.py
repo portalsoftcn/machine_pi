@@ -14,8 +14,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     """
     Class documentation goes here.
     """
-    address = 0x04
-    bus = None
     def __init__(self, parent=None):
         """
         Constructor
@@ -25,21 +23,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
-        bus = smbus2.SMBus(1)
-        
-    
+        self.address = 0x04
+        self.bus = smbus2.SMBus(1)
     @pyqtSlot()
     def on_btnOilStop_clicked(self):
         """
         Slot documentation goes here.
         """
         # TODO: not implemented yet
-        self.lblPlatform.setText('油泵停止')
-    
+        print(" stop ")
+        self.bus.write_byte(self.address,22)
     @pyqtSlot()
     def on_btnOilStart_clicked(self):
         """
         Slot documentation goes here.
         """
         # TODO: not implemented yet
-        self.lblPlatform.setText('油泵启动')
+        self.bus.write_byte(self.address,21)
