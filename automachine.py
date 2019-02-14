@@ -8,6 +8,7 @@ import ui.MainUI
 from PyQt5.QtWidgets import QApplication, QWidget
 
 if __name__ == '__main__':
+    """
     app = QApplication(sys.argv)
     desktop = QApplication.desktop();
     screenRect = desktop.screenGeometry()
@@ -18,10 +19,7 @@ if __name__ == '__main__':
     w.setWindowTitle('磨机辅助控制系统')
     w.show()
     sys.exit(app.exec_())
-
-    bus = smbus2.SMBus(1)
-    address = 0x04
-
+    
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
         s.connect(('www.baidu.com', 0))
@@ -35,7 +33,10 @@ if __name__ == '__main__':
     lcd = Adafruit_CharLCD.Adafruit_CharLCD()
     lcd.clear()
     lcd.message("IP:" + ip_address + "\nReady Do Command")
-
+    """
+    
+    bus = smbus2.SMBus(1)
+    address = 0x04
     while True:
         print ("distance is:")
         time.sleep(0.2)
@@ -49,6 +50,6 @@ if __name__ == '__main__':
         ret = requests.get("http://erp.zzhcdr.com/getcmd.jsp")
         cmd = ret.text.strip()
         if cmd != '':
-            lcd.clear()
-            lcd.message("IP:" + ip_address + "\nDo Command:" + cmd)
+            #lcd.clear()
+            #lcd.message("IP:" + ip_address + "\nDo Command:" + cmd)
             bus.write_byte(0x04, int(cmd))
