@@ -28,6 +28,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.address = 0x04
         self.bus = smbus2.SMBus(1)
+        self.disPlatform = 0
+        self.disBeam = 0
         timer = threading.Timer(0.2,self.getDistance)
         timer.start()
     def getDistance(self):
@@ -38,10 +40,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 id = byteList[a * 3]
                 distance = byteList[a * 3 + 1] * 256 + byteList[a * 3 + 2]
                 distanceStr += str(id) + ":" + str(distance) + " "
-            print (distanceStr)
+                if id == 1:
+                    self.disPlatform = distance
+                elif id ==2:
+                    self.disBeam = distance
+            print(distanceStr)
         except OSError as e:
             print("bus read error",e)
-                
+        self.lblPlatform.setText(str(self.disPlatform))
+        self.lblBeam.setText(str(self.disBeam))
         timer = threading.Timer(0.2,self.getDistance)
         timer.start()
         
