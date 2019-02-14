@@ -3,7 +3,7 @@
 """
 Module implementing MainWindow.
 """
-
+import smbus2
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMainWindow
 
@@ -14,6 +14,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     """
     Class documentation goes here.
     """
+    address = 0x04
+    bus = None
     def __init__(self, parent=None):
         """
         Constructor
@@ -23,6 +25,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
+        bus = smbus2.SMBus(1)
+        
     
     @pyqtSlot()
     def on_btnOilStop_clicked(self):
